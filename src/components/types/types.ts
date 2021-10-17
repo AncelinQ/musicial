@@ -1,5 +1,9 @@
 //Main type with properties presents in User, Band and Ad
-export interface IEntity {
+export interface IId {
+    id?: Number
+}
+
+export interface IEntity extends IId {
     city: String
     picture?: String
     experience?: String //may become mandatory
@@ -20,43 +24,45 @@ export interface IUser extends IEntity {
     email: String;
     firstName: String;
     lastName: String;
-    nickName: String;
+    nickName?: String;
     age: Number;
     gender: Number;
-    instruments: String[];
-    formerBand: String[];
-    bands: IBand[];
+    instruments?: String[];
+    formerBand?: String[];
+    bands?: IBand[];
     isManager: Boolean;
 }
 
 export interface IBand extends IEntity {
     name: String;
-    members: IUser[];
+    members?: IUser[];
     admin: IUser[];
-    sinc: Date;
+    since?: Date;
     contact?: String;
-    formerName: String;
-    concerts: IConcert[];
+    formerName?: String;
+    concerts?: IConcert[];
 }
 
-export interface IConcert {
+export interface IConcert extends IId {
     band: IBand
     date: Date
     time: Date
     location: String
-    price: Number
+    price?: Number
 }
 
 export interface IInteractions {
     content: String;
     createdAt: Date;
-    updatedAt: Date;
+    updatedAt?: Date;
+    createdBy: IUser | IBand;
 }
 
 export interface IAd extends IInteractions, IEntity {
-    priority: String
+    priority?: String
+    title: String
 }
 
-export interface IMessage extends IInteractions {
-    recipient: IEntity
+export interface IMessage extends IInteractions, IId {
+    recipient: IUser
 }
