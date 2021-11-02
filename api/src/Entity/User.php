@@ -138,7 +138,7 @@ class User
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="toUser")
      */
-    private $messages;
+    private $receivedMessages;
 
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="fromUser")
@@ -159,7 +159,7 @@ class User
         $this->instruments = new ArrayCollection();
         $this->advertisements = new ArrayCollection();
         $this->styles = new ArrayCollection();
-        $this->messages = new ArrayCollection();
+        $this->receivedMessages = new ArrayCollection();
         $this->sentMessages = new ArrayCollection();
         $this->favoriteAds = new ArrayCollection();
     }
@@ -550,24 +550,24 @@ class User
     /**
      * @return Collection|Message[]
      */
-    public function getMessages(): Collection
+    public function getReceivedMessages(): Collection
     {
-        return $this->messages;
+        return $this->receivedMessages;
     }
 
-    public function addMessage(Message $message): self
+    public function addReceivedMessage(Message $message): self
     {
-        if (!$this->messages->contains($message)) {
-            $this->messages[] = $message;
+        if (!$this->receivedMessages->contains($message)) {
+            $this->receivedMessages[] = $message;
             $message->setToUser($this);
         }
 
         return $this;
     }
 
-    public function removeMessage(Message $message): self
+    public function removeReceivedMessage(Message $message): self
     {
-        if ($this->messages->removeElement($message)) {
+        if ($this->receivedMessages->removeElement($message)) {
             // set the owning side to null (unless already changed)
             if ($message->getToUser() === $this) {
                 $message->setToUser(null);

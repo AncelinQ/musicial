@@ -23,7 +23,7 @@ class Message
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedMessages")
      */
     private $toUser;
 
