@@ -130,6 +130,21 @@ class Band
      */
     private $styles;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="toBand")
+     */
+    private $receivedMessages;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="fromBand")
+     */
+    private $sentMessages;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Advertisement::class, inversedBy="bandLikes")
+     */
+    private $favoriteAds;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -141,6 +156,9 @@ class Band
         $this->favoriteUsers = new ArrayCollection();
         $this->advertisements = new ArrayCollection();
         $this->styles = new ArrayCollection();
+        $this->receivedMessages = new ArrayCollection();
+        $this->sentMessages = new ArrayCollection();
+        $this->favoriteAds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -507,6 +525,90 @@ class Band
         if ($this->styles->removeElement($style)) {
             $style->removeBand($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getReceivedMessages(): Collection
+    {
+        return $this->receivedMessages;
+    }
+
+    public function addReceivedMessage(Message $receivedMessage): self
+    {
+        if (!$this->receivedMessages->contains($receivedMessage)) {
+            $this->receivedMessages[] = $receivedMessage;
+            $receivedMessage->setToBand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceivedMessage(Message $receivedMessage): self
+    {
+        if ($this->receivedMessages->removeElement($receivedMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($receivedMessage->getToBand() === $this) {
+                $receivedMessage->setToBand(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getSentMessages(): Collection
+    {
+        return $this->sentMessages;
+    }
+
+    public function addSentMessage(Message $sentMessage): self
+    {
+        if (!$this->sentMessages->contains($sentMessage)) {
+            $this->sentMessages[] = $sentMessage;
+            $sentMessage->setFromBand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSentMessage(Message $sentMessage): self
+    {
+        if ($this->sentMessages->removeElement($sentMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($sentMessage->getFromBand() === $this) {
+                $sentMessage->setFromBand(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Advertisement[]
+     */
+    public function getFavoriteAds(): Collection
+    {
+        return $this->favoriteAds;
+    }
+
+    public function addFavoriteAd(Advertisement $favoriteAd): self
+    {
+        if (!$this->favoriteAds->contains($favoriteAd)) {
+            $this->favoriteAds[] = $favoriteAd;
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteAd(Advertisement $favoriteAd): self
+    {
+        $this->favoriteAds->removeElement($favoriteAd);
 
         return $this;
     }

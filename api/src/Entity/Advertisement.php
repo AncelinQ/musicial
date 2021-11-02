@@ -89,10 +89,22 @@ class Advertisement
      */
     private $styles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="favoriteAds")
+     */
+    private $userLikes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="favoriteAds")
+     */
+    private $bandLikes;
+
     public function __construct()
     {
         $this->instruments = new ArrayCollection();
         $this->styles = new ArrayCollection();
+        $this->userLikes = new ArrayCollection();
+        $this->bandLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -290,6 +302,60 @@ class Advertisement
     {
         if ($this->styles->removeElement($style)) {
             $style->removeAdvertisement($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUserLikes(): Collection
+    {
+        return $this->userLikes;
+    }
+
+    public function addUserLike(User $userLike): self
+    {
+        if (!$this->userLikes->contains($userLike)) {
+            $this->userLikes[] = $userLike;
+            $userLike->addFavoriteAd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLike(User $userLike): self
+    {
+        if ($this->userLikes->removeElement($userLike)) {
+            $userLike->removeFavoriteAd($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Band[]
+     */
+    public function getBandLikes(): Collection
+    {
+        return $this->bandLikes;
+    }
+
+    public function addBandLike(Band $bandLike): self
+    {
+        if (!$this->bandLikes->contains($bandLike)) {
+            $this->bandLikes[] = $bandLike;
+            $bandLike->addFavoriteAd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBandLike(Band $bandLike): self
+    {
+        if ($this->bandLikes->removeElement($bandLike)) {
+            $bandLike->removeFavoriteAd($this);
         }
 
         return $this;

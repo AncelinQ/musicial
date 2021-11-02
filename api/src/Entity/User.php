@@ -135,6 +135,21 @@ class User
      */
     private $styles;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="toUser")
+     */
+    private $messages;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="fromUser")
+     */
+    private $sentMessages;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Advertisement::class, inversedBy="userLikes")
+     */
+    private $favoriteAds;
+
     public function __construct()
     {
         $this->favoriteUsers = new ArrayCollection();
@@ -144,6 +159,9 @@ class User
         $this->instruments = new ArrayCollection();
         $this->advertisements = new ArrayCollection();
         $this->styles = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+        $this->sentMessages = new ArrayCollection();
+        $this->favoriteAds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -525,6 +543,90 @@ class User
         if ($this->styles->removeElement($style)) {
             $style->removeUser($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setToUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getToUser() === $this) {
+                $message->setToUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getSentMessages(): Collection
+    {
+        return $this->sentMessages;
+    }
+
+    public function addSentMessage(Message $sentMessage): self
+    {
+        if (!$this->sentMessages->contains($sentMessage)) {
+            $this->sentMessages[] = $sentMessage;
+            $sentMessage->setFromUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSentMessage(Message $sentMessage): self
+    {
+        if ($this->sentMessages->removeElement($sentMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($sentMessage->getFromUser() === $this) {
+                $sentMessage->setFromUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Advertisement[]
+     */
+    public function getFavoriteAds(): Collection
+    {
+        return $this->favoriteAds;
+    }
+
+    public function addFavoriteAd(Advertisement $favoriteAd): self
+    {
+        if (!$this->favoriteAds->contains($favoriteAd)) {
+            $this->favoriteAds[] = $favoriteAd;
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteAd(Advertisement $favoriteAd): self
+    {
+        $this->favoriteAds->removeElement($favoriteAd);
 
         return $this;
     }
