@@ -1,19 +1,12 @@
-import React, { FC, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FC } from 'react';
+import { IUser, IAd } from '../types/types';
 
-interface HomeCardProps {
-  title: string;
-  description: string;
-  url: string;
-  urlDescription: string;
+interface UserAdProps {
+  user: IUser;
+  ad: IAd;
 }
 
-const HomeCard: FC<HomeCardProps> = ({
-  title,
-  description,
-  url,
-  urlDescription
-}) => {
+const UserAd: FC<UserAdProps> = ({ user, ad }) => {
   return (
     <>
       <div className="column">
@@ -21,15 +14,13 @@ const HomeCard: FC<HomeCardProps> = ({
           <div className="card">
             <div className="card-header has-background-primary">
               <h2 className="card-header-title is-centered title is-2 has-text-white	">
-                {title}
+                {user.firstName} {user.lastName}
               </h2>
             </div>
             <div className="card-content">
               <div className="content">
-                <p>{description}</p>
-                <a className="button is-primary" href={url}>
-                  {urlDescription}
-                </a>
+                <p></p>
+                <a className="button is-primary" href={}></a>
               </div>
             </div>
           </div>
@@ -39,4 +30,4 @@ const HomeCard: FC<HomeCardProps> = ({
   );
 };
 
-export default HomeCard;
+export default UserAd;
