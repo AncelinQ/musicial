@@ -14,7 +14,8 @@ import {
   faSearch,
   faMapMarkedAlt,
   faHeart,
-  faStar
+  faStar,
+  faMapMarkerAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { StandardLayout } from './layouts';
 
@@ -29,7 +30,8 @@ library.add(
   faSearch,
   faMapMarkedAlt,
   faHeart,
-  faStar
+  faStar,
+  faMapMarkerAlt
 );
 
 const App: FC = () => {
@@ -38,7 +40,6 @@ const App: FC = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
-
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/ads" component={AdPage} />
         </Switch>
