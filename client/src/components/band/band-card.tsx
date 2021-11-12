@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import { IUser, IAd } from '../types/types';
+import { IBand } from '../types/types';
 
-interface UserAdProps {
-  user: IUser;
-  ad: IAd;
+interface BandCardProps {
+  band: IBand;
 }
 
-const UserAd: FC<UserAdProps> = ({ user, ad }) => {
+const BandCard: FC<BandCardProps> = ({ band }) => {
   return (
     <>
       <div className="column">
@@ -14,7 +13,7 @@ const UserAd: FC<UserAdProps> = ({ user, ad }) => {
           <div className="card">
             <div className="card-header has-background-primary">
               <h2 className="card-header-title is-centered title is-2 has-text-white	">
-                {user.firstName} {user.lastName}
+                {band.name}
               </h2>
             </div>
             <div className="card-content">
@@ -30,4 +29,4 @@ const UserAd: FC<UserAdProps> = ({ user, ad }) => {
   );
 };
 
-export default UserAd;
+export default BandCard;

@@ -1,17 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { RouteComponentProps } from 'react-router';
-import { HomeCard } from '../components/homeCard';
-import { StandardLayout, FlexLayout } from '../layouts';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { BandCard } from '../components/band';
+import { IBand } from '../components/types/types';
+import { Bands } from '../data/data';
 
 type FormValues = {
   searchParams: string;
   city: string;
 };
 
-const HomePage: FC<RouteComponentProps> = () => {
+const BandPage: FC<RouteComponentProps> = ({}) => {
+  const [bands, setBand] = useState(Bands);
   const {
     register,
     handleSubmit,
@@ -21,28 +22,10 @@ const HomePage: FC<RouteComponentProps> = () => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
   };
-
   return (
     <>
-      <h1 className="title has-text-centered">Toutes les Annonces</h1>
+      <h1 className="title has-text-centered">Tous les Groupes</h1>
       <form onSubmit={handleSubmit(onSubmit)} method="post">
-        <div className="control has-text-centered">
-          <label className="radio">De Groupes </label>
-          <input
-            type="radio"
-            name="AdType"
-            id="groupAdType"
-            value="groupAdType"
-            checked
-          />
-          <label className="radio">De Musiciens</label>
-          <input
-            type="radio"
-            name="AdType"
-            id="musicianAdType"
-            value="musicianAdType"
-          />
-        </div>
         <div className="field is-grouped">
           <div className="control has-icons-left is-expanded">
             <label className="label is-hidden">Recherche</label>
@@ -75,8 +58,13 @@ const HomePage: FC<RouteComponentProps> = () => {
           </button>
         </div>
       </form>
+      <div>
+        {bands.map((band, index) => (
+          <BandCard key={index} band={band} />
+        ))}
+      </div>
     </>
   );
 };
 
-export default HomePage;
+export default BandPage;

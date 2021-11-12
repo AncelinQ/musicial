@@ -18,6 +18,8 @@ import {
   faMapMarkerAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { StandardLayout } from './layouts';
+import MusicianPage from './pages/musicians-page';
+import BandPage from './pages/bands-page';
 
 library.add(
   fab,
@@ -42,6 +44,8 @@ const App: FC = () => {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/ads" component={AdPage} />
+          <Route exact path="/bands" component={BandPage} />
+          <Route exact path="/musicians" component={MusicianPage} />
         </Switch>
       </Router>
     </StandardLayout>

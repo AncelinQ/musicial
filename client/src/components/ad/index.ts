@@ -1,2 +1,2 @@
-export { default as Ad } from './ad'
+export { default as AdCard } from './ad-card'
 

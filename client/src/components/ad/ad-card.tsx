@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { IAd } from '../types/types';
 
-interface AdProps {
+interface AdCardProps {
   ad: IAd;
 }
 
-const Ad: FC<AdProps> = ({ ad }) => {
+const AdCard: FC<AdCardProps> = ({ ad }) => {
   return (
     <>
       <div className="column">
@@ -43,4 +43,4 @@ const Ad: FC<AdProps> = ({ ad }) => {
   );
 };
 
-export default Ad;
+export default AdCard;
