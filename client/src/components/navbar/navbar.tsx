@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Logo from '../../assets/images/logo/musicial_full_logo_black_on_white.png';
 
 const Navbar: FC = () => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -7,12 +8,8 @@ const Navbar: FC = () => {
     <>
       <nav className="navbar" role="navigation" aria-label="main-navigation">
         <div className="navbar-brand">
-          <a href="/">
-            <img
-              src="src\assets\images\logo\musicial_full_logo_black_on_white.png"
-              alt="Musicial"
-              width="250"
-            />
+          <a href="/home">
+            <img src={Logo} alt="Musicial" width="250" />
           </a>
           <a
             role="button"
@@ -29,17 +26,17 @@ const Navbar: FC = () => {
         <div className="navbar-menu">
           <div className="navbar-start">
             <div className="navbar-item">
-              <a href="ads">
+              <a href="/ads">
                 <span className="ml-2">Les Annonces</span>
               </a>
             </div>
             <div className="navbar-item">
-              <a href="bands">
+              <a href="/bands">
                 <span className="ml-2">Les Groupes</span>
               </a>
             </div>
             <div className="navbar-item">
-              <a href="musicians">
+              <a href="/musicians">
                 <span className="ml-2">Les Musiciens</span>
               </a>
             </div>

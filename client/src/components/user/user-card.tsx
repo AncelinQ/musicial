@@ -19,7 +19,9 @@ const UserCard: FC<UserCardProps> = ({ user }) => {
             <div className="card-content">
               <div className="content">
                 <p></p>
-                <a className="button is-primary" href={'#'}></a>
+                <a className="button is-primary" href={`/musicians/${user.id}`}>
+                  Voir
+                </a>
               </div>
             </div>
           </div>

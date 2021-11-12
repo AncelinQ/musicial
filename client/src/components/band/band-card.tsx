@@ -19,7 +19,9 @@ const BandCard: FC<BandCardProps> = ({ band }) => {
             <div className="card-content">
               <div className="content">
                 <p></p>
-                <a className="button is-primary" href={'#'}></a>
+                <a className="button is-primary" href={`/bands/${band.id}`}>
+                  Voir
+                </a>
               </div>
             </div>
           </div>

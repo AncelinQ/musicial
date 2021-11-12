@@ -22,7 +22,7 @@ const AdCard: FC<AdCardProps> = ({ ad }) => {
             <div className="card-content">
               <div className="content">
                 <p>{ad.content}</p>
-                <a className="button is-primary" href={`/ad/${ad.id}`}>
+                <a className="button is-primary" href={`/ads/${ad.id}`}>
                   Voir
                 </a>
               </div>
