@@ -20,7 +20,7 @@ const UserAd: FC<UserAdProps> = ({ user, ad }) => {
             <div className="card-content">
               <div className="content">
                 <p></p>
-                <a className="button is-primary" href={}></a>
+                <a className="button is-primary" href={'#'}></a>
               </div>
             </div>
           </div>
