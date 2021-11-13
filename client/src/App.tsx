@@ -22,7 +22,11 @@ import {
   faMapMarkedAlt,
   faHeart,
   faStar,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faLock,
+  faExclamationTriangle,
+  faEye,
+  faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
 import { StandardLayout } from './layouts';
 import MusicianPage from './pages/musicians-page';
@@ -40,7 +44,11 @@ library.add(
   faMapMarkedAlt,
   faHeart,
   faStar,
-  faMapMarkerAlt
+  faMapMarkerAlt,
+  faLock,
+  faExclamationTriangle,
+  faEye,
+  faEyeSlash
 );
 
 const App: FC = () => {
@@ -48,7 +56,7 @@ const App: FC = () => {
     <StandardLayout>
       <Router>
         <Switch>
-          <Route exact path="/home" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/ads" component={AdPage} />
           <Route exact path="/ads/:id(\d+)" component={AdSinglePage} />
