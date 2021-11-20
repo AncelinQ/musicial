@@ -25,7 +25,7 @@ const AdPage: FC<RouteComponentProps> = ({}) => {
   return (
     <>
       <h1 className="title has-text-centered">Toutes les Annonces</h1>
-      <form onSubmit={handleSubmit(onSubmit)} method="post">
+      <form onSubmit={handleSubmit(onSubmit)} method="get">
         <div className="control has-text-centered">
           <label className="radio">De Groupes </label>
           <input

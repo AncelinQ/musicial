@@ -1,6 +1,5 @@
 import { IAd, IBand, IUser } from "../components/types/types"
 
-
 export const Users: IUser[] = [
     {
         id: 1,
@@ -31,7 +30,6 @@ export const Users: IUser[] = [
         songReferences: ["Ma Benz", "Le Mia"],
     },
 ]
-
 
 export const Bands: IBand[] = [
     {
